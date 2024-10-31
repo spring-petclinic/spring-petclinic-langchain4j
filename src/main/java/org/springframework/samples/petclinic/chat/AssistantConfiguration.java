@@ -1,7 +1,7 @@
 package org.springframework.samples.petclinic.chat;
 
 import dev.langchain4j.data.segment.TextSegment;
-import dev.langchain4j.memory.ChatMemory;
+import dev.langchain4j.memory.chat.ChatMemoryProvider;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.model.chat.ChatLanguageModel;
 import dev.langchain4j.model.embedding.EmbeddingModel;
@@ -21,8 +21,8 @@ class AssistantConfiguration {
 	 * This chat memory will be used by an {@link Assistant}
 	 */
 	@Bean
-	ChatMemory chatMemory() {
-		return MessageWindowChatMemory.withMaxMessages(10);
+	ChatMemoryProvider chatMemoryProvider() {
+		return memoryId -> MessageWindowChatMemory.withMaxMessages(10);
 	}
 
 	@Bean

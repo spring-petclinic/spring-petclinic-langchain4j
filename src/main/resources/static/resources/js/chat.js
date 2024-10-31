@@ -46,9 +46,16 @@ async function sendMessage() {
     const userElements = prepareMessage("user");
     displayMessage(query, userElements);
 
+    // Retrieve or create a UserID as a UUID v4
+    let userId = sessionStorage.getItem('userId');
+    if (!userId) {
+        userId = uuidv4();
+        sessionStorage.setItem('userId', userId);
+    }
+
     // We'll start by using fetch to initiate a POST request to our SSE endpoint.
     // This endpoint is configured to send multiple messages, with the response header Content-Type: text/event-stream.
-    let response = await fetch('/chat', {
+    let response = await fetch('/chat/' + userId, {
         method: 'POST',
         headers: {
             'Accept': 'text/event-stream',
@@ -117,4 +124,13 @@ function loadChatMessages() {
         document.getElementById('chatbox-messages').innerHTML = messages;
         document.getElementById('chatbox-messages').scrollTop = document.getElementById('chatbox-messages').scrollHeight;
     }
+}
+
+function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+        .replace(/[xy]/g, function (c) {
+            const r = Math.random() * 16 | 0;
+            const v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
 }

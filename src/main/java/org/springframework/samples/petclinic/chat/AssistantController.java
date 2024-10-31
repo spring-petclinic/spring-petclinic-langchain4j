@@ -2,12 +2,11 @@ package org.springframework.samples.petclinic.chat;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
+import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -25,10 +24,10 @@ class AssistantController {
 	}
 
 	// Using the POST method due to chat memory capabilities
-	@PostMapping(value = "/chat")
-	public SseEmitter chat(@RequestBody String query) {
+	@PostMapping(value = "/chat/{user}")
+	public SseEmitter chat(@PathVariable UUID user, @RequestBody String query) {
 		SseEmitter emitter = new SseEmitter();
-		nonBlockingService.execute(() -> assistant.chat(query).onNext(message -> {
+		nonBlockingService.execute(() -> assistant.chat(user, query).onNext(message -> {
 			try {
 				sendMessage(emitter, message);
 			}
