@@ -48,7 +48,10 @@ public class AssistantTool {
 	@Tool("Add a pet with the specified petTypeId, to an owner identified by the ownerId")
 	public AddedPetResponse addPetToOwner(AddPetRequest request) {
 		Owner owner = ownerRepository.findById(request.ownerId()).orElseThrow();
-		owner.addPet(request.pet());
+		// Waiting for https://github.com/langchain4j/langchain4j/issues/2249
+		Pet pet = request.pet();
+		pet.setName(request.petName());
+		owner.addPet(pet);
 		this.ownerRepository.save(owner);
 		return new AddedPetResponse(owner);
 	}
@@ -69,7 +72,7 @@ public class AssistantTool {
 
 }
 
-record AddPetRequest(Pet pet, Integer ownerId) {
+record AddPetRequest(Pet pet, String petName, Integer ownerId) {
 }
 
 record OwnerRequest(Owner owner) {
