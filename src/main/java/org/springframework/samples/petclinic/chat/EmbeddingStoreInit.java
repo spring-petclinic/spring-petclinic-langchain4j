@@ -59,7 +59,7 @@ public class EmbeddingStoreInit {
 			.embeddingStore(embeddingStore)
 			.build();
 
-		ingestor.ingest(new Document(vetsAsJson));
+		ingestor.ingest(Document.from(vetsAsJson));
 
 		// In-memory embedding store can be serialized and deserialized to/from file
 		// String filePath = "embedding.store";

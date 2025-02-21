@@ -38,7 +38,7 @@
     <maven-checkstyle.version>3.6.0</maven-checkstyle.version>
     <nohttp-checkstyle.version>0.0.11</nohttp-checkstyle.version>
     <spring-format.version>0.0.43</spring-format.version>
-    <langchain4j.version>1.0.0-alpha1</langchain4j.version>
+    <langchain4j.version>1.0.0-beta1</langchain4j.version>
   </properties>
 
   <dependencies>
