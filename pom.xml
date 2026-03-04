@@ -4,11 +4,11 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>4.0.0</version>
+    <version>4.0.6</version>
   </parent>
   <groupId>org.springframework.samples</groupId>
   <artifactId>spring-petclinic-langchain4j</artifactId>
-  <version>4.0.0-SNAPSHOT</version>
+  <version>4.0.6</version>
   <name>petclinic</name>
 
   <properties>
@@ -32,7 +32,8 @@
     <maven-checkstyle.version>3.6.0</maven-checkstyle.version>
     <nohttp-checkstyle.version>0.0.11</nohttp-checkstyle.version>
     <spring-format.version>0.0.47</spring-format.version>
-    <langchain4j.version>1.7.1</langchain4j.version>
+    <langchain4j.version>1.14.0</langchain4j.version>
+    <langchain4j-spring.version>1.14.0-beta24</langchain4j-spring.version>
   </properties>
 
   <dependencyManagement>
@@ -87,6 +88,18 @@
     <dependency>
       <groupId>dev.langchain4j</groupId>
       <artifactId>langchain4j-embeddings-all-minilm-l6-v2</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>dev.langchain4j</groupId>
+      <artifactId>langchain4j-http-client-spring-boot4-restclient</artifactId>
+      <!-- Waiting https://github.com/langchain4j/langchain4j/pull/5090 -->
+      <version>${langchain4j-spring.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>dev.langchain4j</groupId>
+      <artifactId>langchain4j-open-ai-spring-boot4-starter</artifactId>
+      <!-- Waiting https://github.com/langchain4j/langchain4j/pull/5090 -->
+      <version>${langchain4j-spring.version}</version>
     </dependency>
 
     <dependency>
@@ -453,7 +466,9 @@
       <dependencies>
         <dependency>
           <groupId>dev.langchain4j</groupId>
-          <artifactId>langchain4j-open-ai-spring-boot-starter</artifactId>
+          <artifactId>langchain4j-open-ai-spring-boot4-starter</artifactId>
+          <!-- Waiting https://github.com/langchain4j/langchain4j/pull/5090 -->
+          <version>${langchain4j-spring.version}</version>
         </dependency>
       </dependencies>
     </profile>
@@ -462,7 +477,9 @@
       <dependencies>
         <dependency>
           <groupId>dev.langchain4j</groupId>
-          <artifactId>langchain4j-azure-open-ai-spring-boot-starter</artifactId>
+          <artifactId>langchain4j-azure-open-ai-spring-boot4-starter</artifactId>
+          <!-- Waiting https://github.com/langchain4j/langchain4j/pull/5090 -->
+          <version>${langchain4j-spring.version}</version>
         </dependency>
       </dependencies>
     </profile>
@@ -471,7 +488,9 @@
       <dependencies>
         <dependency>
           <groupId>dev.langchain4j</groupId>
-          <artifactId>langchain4j-ollama-spring-boot-starter</artifactId>
+          <artifactId>langchain4j-ollama-spring-boot4-starter</artifactId>
+          <!-- Waiting https://github.com/langchain4j/langchain4j/pull/5090 -->
+          <version>${langchain4j-spring.version}</version>
         </dependency>
       </dependencies>
     </profile>
