@@ -63,8 +63,8 @@ Switching between LLM is done using **Maven profiles**. Three Maven profiles are
 2. `azure-openai`
 3. `ollama`
 
-By default, thanks to the default `openai` profile, the `langchain4j-open-ai-spring-boot-starter` dependency is enabled.
-You can change it to `langchain4j-azure-open-ai-spring-boot-starter` or `langchain4j-ollama-spring-boot-starter` by activating the corresponding profile.
+By default, thanks to the default `openai` profile, the `langchain4j-open-ai-spring-boot4-starter` dependency is enabled.
+You can change it to `langchain4j-azure-open-ai-spring-boot-starter` or `langchain4j-ollama-spring-boot4-starter` by activating the corresponding profile.
 ```shell
 ./mvnw package -P azure-openai
 ```
@@ -72,7 +72,7 @@ You can change it to `langchain4j-azure-open-ai-spring-boot-starter` or `langcha
 
 #### Gradle build
 
-Gradle users will need to comment or uncomment the appropriate `dev.langchain4j:langchain4j-<llm>>-spring-boot-starter` dependency
+Gradle users will need to comment or uncomment the appropriate `dev.langchain4j:langchain4j-<llm>>-spring-boot4-starter` dependency
 in the `build.gradle` file, depending on the LLM provider they want to use.
 
 

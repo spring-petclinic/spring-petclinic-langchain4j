@@ -8,7 +8,6 @@
   </parent>
   <groupId>org.springframework.samples</groupId>
   <artifactId>spring-petclinic-langchain4j</artifactId>
-  <version>4.0.6</version>
   <name>petclinic</name>
 
   <properties>
