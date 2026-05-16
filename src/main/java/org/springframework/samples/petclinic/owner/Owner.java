@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2019 the original author or authors.
+ * Copyright 2012-2025 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ package org.springframework.samples.petclinic.owner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.core.style.ToStringCreator;
 import org.springframework.samples.petclinic.model.Person;
@@ -49,17 +50,17 @@ public class Owner extends Person {
 
 	private static final long serialVersionUID = 7676019169107660494L;
 
-	@Column(name = "address")
+	@Column
 	@NotBlank
 	private String address;
 
-	@Column(name = "city")
+	@Column
 	@NotBlank
 	private String city;
 
-	@Column(name = "telephone")
+	@Column
 	@NotBlank
-	@Pattern(regexp = "\\d{10}", message = "Telephone must be a 10-digit number")
+	@Pattern(regexp = "\\d{10}", message = "{telephone.invalid}")
 	private String telephone;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -119,7 +120,7 @@ public class Owner extends Person {
 		for (Pet pet : getPets()) {
 			if (!pet.isNew()) {
 				Integer compId = pet.getId();
-				if (compId.equals(id)) {
+				if (Objects.equals(compId, id)) {
 					return pet;
 				}
 			}

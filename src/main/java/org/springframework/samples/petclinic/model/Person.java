@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2019 the original author or authors.
+ * Copyright 2012-2025 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,11 +29,11 @@ public class Person extends BaseEntity {
 
 	private static final long serialVersionUID = -5934070342233945557L;
 
-	@Column(name = "first_name")
+	@Column
 	@NotBlank
 	private String firstName;
 
-	@Column(name = "last_name")
+	@Column
 	@NotBlank
 	private String lastName;
 

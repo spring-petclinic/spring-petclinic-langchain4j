@@ -63,8 +63,8 @@ Switching between LLM is done using **Maven profiles**. Three Maven profiles are
 2. `azure-openai`
 3. `ollama`
 
-By default, thanks to the default `openai` profile, the `langchain4j-open-ai-spring-boot-starter` dependency is enabled.
-You can change it to `langchain4j-azure-open-ai-spring-boot-starter` or `langchain4j-ollama-spring-boot-starter` by activating the corresponding profile.
+By default, thanks to the default `openai` profile, the `langchain4j-open-ai-spring-boot4-starter` dependency is enabled.
+You can change it to `langchain4j-azure-open-ai-spring-boot-starter` or `langchain4j-ollama-spring-boot4-starter` by activating the corresponding profile.
 ```shell
 ./mvnw package -P azure-openai
 ```
@@ -72,7 +72,7 @@ You can change it to `langchain4j-azure-open-ai-spring-boot-starter` or `langcha
 
 #### Gradle build
 
-Gradle users will need to comment or uncomment the appropriate `dev.langchain4j:langchain4j-<llm>>-spring-boot-starter` dependency
+Gradle users will need to comment or uncomment the appropriate `dev.langchain4j:langchain4j-<llm>>-spring-boot4-starter` dependency
 in the `build.gradle` file, depending on the LLM provider they want to use.
 
 
@@ -110,10 +110,17 @@ ollama run llama3.1
 ```
 By default, the Ollama REST API starts on `http://localhost:11434`. This URL is used in the `application.properties` file.
 
+See the presentation here:  
+[Spring Petclinic Sample Application (legacy slides)](https://speakerdeck.com/michaelisvy/spring-petclinic-sample-application?slide=20)
+
+> **Note:** These slides refer to a legacy, pre–Spring Boot version of Petclinic and may not reflect the current Spring Boot–based implementation.  
+> For up-to-date information, please refer to this repository and its documentation.
+
 
 ## Run Petclinic locally
 
-Spring Petclinic is a [Spring Boot](https://spring.io/guides/gs/spring-boot) application built using [Maven](https://spring.io/guides/gs/maven/) or [Gradle](https://spring.io/guides/gs/gradle/). You can build a jar file and run it from the command line (it should work just as well with Java 17 or newer):
+Spring Petclinic is a [Spring Boot](https://spring.io/guides/gs/spring-boot) application built using [Maven](https://spring.io/guides/gs/maven/) or [Gradle](https://spring.io/guides/gs/gradle/).
+Java 17 or later is required for the build, and the application can run with Java 17 or newer:
 
 ```bash
 git clone https://github.com/spring-petclinic/spring-petclinic-langchain4j.git
@@ -121,6 +128,8 @@ cd spring-petclinic
 ./mvnw package
 java -jar target/*.jar
 ```
+
+(On Windows, or if your shell doesn't expand the glob, you might need to specify the JAR file name explicitly on the command line at the end there.)
 
 You can then access the Petclinic at <http://localhost:8080/>.
 
@@ -157,13 +166,13 @@ A similar setup is provided for MySQL and PostgreSQL if a persistent database co
 You can start MySQL or PostgreSQL locally with whatever installer works for your OS or use docker:
 
 ```bash
-docker run -e MYSQL_USER=petclinic -e MYSQL_PASSWORD=petclinic -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=petclinic -p 3306:3306 mysql:9.1
+docker run -e MYSQL_USER=petclinic -e MYSQL_PASSWORD=petclinic -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=petclinic -p 3306:3306 mysql:9.5
 ```
 
 or
 
 ```bash
-docker run -e POSTGRES_USER=petclinic -e POSTGRES_PASSWORD=petclinic -e POSTGRES_DB=petclinic -p 5432:5432 postgres:17.0
+docker run -e POSTGRES_USER=petclinic -e POSTGRES_PASSWORD=petclinic -e POSTGRES_DB=petclinic -p 5432:5432 postgres:18.1
 ```
 
 Further documentation is provided for [MySQL](https://github.com/spring-petclinic/spring-petclinic-langchain4j/blob/main/src/main/resources/db/mysql/petclinic_db_setup_mysql.txt)
@@ -195,7 +204,7 @@ There is a `petclinic.css` in `src/main/resources/static/resources/css`. It was 
 
 The following items should be installed in your system:
 
-- Java 17 or newer (full JDK, not a JRE)
+- Java 25 or newer (full JDK, not a JRE)
 - [Git command line tool](https://help.github.com/articles/set-up-git)
 - Your preferred IDE
   - Eclipse with the m2e plugin. Note: when m2e is available, there is an m2 icon in `Help -> About` dialog. If m2e is

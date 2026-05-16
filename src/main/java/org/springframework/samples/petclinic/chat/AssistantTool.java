@@ -4,10 +4,7 @@ import dev.langchain4j.agent.tool.Tool;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.samples.petclinic.owner.Owner;
-import org.springframework.samples.petclinic.owner.OwnerRepository;
-import org.springframework.samples.petclinic.owner.Pet;
-import org.springframework.samples.petclinic.owner.PetType;
+import org.springframework.samples.petclinic.owner.*;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -25,8 +22,11 @@ public class AssistantTool {
 
 	private final OwnerRepository ownerRepository;
 
-	public AssistantTool(OwnerRepository ownerRepository) {
+	private final PetTypeRepository petTypeRepository;
+
+	public AssistantTool(OwnerRepository ownerRepository, PetTypeRepository petTypeRepository) {
 		this.ownerRepository = ownerRepository;
+		this.petTypeRepository = petTypeRepository;
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class AssistantTool {
 
 	@Tool("List all pairs of petTypeId and pet type name")
 	public List<PetType> populatePetTypes() {
-		return this.ownerRepository.findPetTypes();
+		return this.petTypeRepository.findPetTypes();
 	}
 
 	@Tool("""

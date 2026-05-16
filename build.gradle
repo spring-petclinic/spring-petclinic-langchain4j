@@ -1,10 +1,11 @@
 plugins {
   id 'java'
-  id 'org.springframework.boot' version '3.4.2'
-  id 'io.spring.dependency-management' version '1.1.6'
-//  id 'org.graalvm.buildtools.native' version '0.10.3'
-  id 'org.cyclonedx.bom' version '1.10.0'
-  id 'io.spring.javaformat' version '0.0.43'
+  id 'checkstyle'
+  id 'org.springframework.boot' version '4.0.6'
+  id 'io.spring.dependency-management' version '1.1.7'
+//  id 'org.graalvm.buildtools.native' version '0.11.1'
+  id 'org.cyclonedx.bom' version '3.0.2'
+  id 'io.spring.javaformat' version '0.0.47'
   id "io.spring.nohttp" version "0.0.11"
 }
 
@@ -15,10 +16,12 @@ apply plugin: 'io.spring.javaformat'
 // gradle.startParameter.excludedTaskNames += [ "checkFormatAot", "checkFormatAotTest" ]
 
 group = 'org.springframework.samples'
-version = '3.4.0'
+version = '4.0.6'
 
 java {
-  sourceCompatibility = JavaVersion.VERSION_17
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(17)
+  }
 }
 
 repositories {
@@ -26,13 +29,13 @@ repositories {
   maven { url 'https://repo.spring.io/milestone' }
 }
 
-ext.checkstyleVersion = "10.20.1"
-ext.springJavaformatCheckstyleVersion = "0.0.43"
-ext.webjarsLocatorLiteVersion = "1.0.1"
+ext.checkstyleVersion = "12.1.2"
+ext.springJavaformatCheckstyleVersion = "0.0.47"
+ext.webjarsLocatorLiteVersion = "1.1.2"
 ext.webjarsFontawesomeVersion = "4.7.0"
-ext.webjarsBootstrapVersion = "5.3.3"
+ext.webjarsBootstrapVersion = "5.3.8"
 ext.webjarsMarkedVersion = "14.1.2"
-ext.langchain4jVersion = "1.9.1"
+ext.langchain4jVersion = "1.15.0"
 
 dependencyManagement {
   imports {
@@ -41,10 +44,10 @@ dependencyManagement {
 }
 
 dependencies {
-  implementation "dev.langchain4j:langchain4j-spring-boot-starter"
-  implementation "dev.langchain4j:langchain4j-open-ai-spring-boot-starter"
-//  implementation "dev.langchain4j:langchain4j-azure-open-ai-spring-boot-starter"
-//  implementation "dev.langchain4j:langchain4j-ollama-spring-boot-starter"
+  implementation "dev.langchain4j:langchain4j-spring-boot4-starter"
+  implementation "dev.langchain4j:langchain4j-open-ai-spring-boot4-starter"
+//  implementation "dev.langchain4j:langchain4j-azure-open-ai-spring-boot4-starter"
+//  implementation "dev.langchain4j:langchain4j-ollama-spring-boot4-starter"
   implementation "dev.langchain4j:langchain4j-embeddings-all-minilm-l6-v2"
   // Workaround for AOT issue (https://github.com/spring-projects/spring-framework/pull/33949) -->
   implementation 'io.projectreactor:reactor-core'
@@ -52,7 +55,7 @@ dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-cache'
   implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
   implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-  implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation 'org.springframework.boot:spring-boot-starter-webmvc'
   implementation 'org.springframework.boot:spring-boot-starter-validation'
   implementation 'javax.cache:cache-api'
   implementation 'jakarta.xml.bind:jakarta.xml.bind-api'
@@ -66,12 +69,14 @@ dependencies {
   runtimeOnly 'com.mysql:mysql-connector-j'
   runtimeOnly 'org.postgresql:postgresql'
   developmentOnly 'org.springframework.boot:spring-boot-devtools'
-  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
+  testImplementation 'org.springframework.boot:spring-boot-starter-restclient-test'
+  testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
   testImplementation 'org.springframework.boot:spring-boot-testcontainers'
   testImplementation 'org.springframework.boot:spring-boot-docker-compose'
-  testImplementation 'org.testcontainers:junit-jupiter'
-  testImplementation 'org.testcontainers:mysql'
-  testImplementation 'org.testcontainers:postgresql'
+  testImplementation 'org.testcontainers:testcontainers-junit-jupiter'
+  testImplementation 'org.testcontainers:testcontainers-mysql'
+  testImplementation 'org.testcontainers:testcontainers-postgresql'
   checkstyle "io.spring.javaformat:spring-javaformat-checkstyle:${springJavaformatCheckstyleVersion}"
   checkstyle "com.puppycrawl.tools:checkstyle:${checkstyleVersion}"
 }
