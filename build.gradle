@@ -35,9 +35,7 @@ ext.webjarsLocatorLiteVersion = "1.1.2"
 ext.webjarsFontawesomeVersion = "4.7.0"
 ext.webjarsBootstrapVersion = "5.3.8"
 ext.webjarsMarkedVersion = "14.1.2"
-ext.langchain4jVersion = "1.14.0"
-// Waiting https://github.com/langchain4j/langchain4j/pull/5090
-ext.langchain4jSpringVersion = "1.14.0-beta24"
+ext.langchain4jVersion = "1.15.0"
 
 dependencyManagement {
   imports {
@@ -46,10 +44,10 @@ dependencyManagement {
 }
 
 dependencies {
-  implementation "dev.langchain4j:langchain4j-spring-boot4-starter:${langchain4jSpringVersion}"
-  implementation "dev.langchain4j:langchain4j-open-ai-spring-boot4-starter:${langchain4jSpringVersion}"
-//  implementation "dev.langchain4j:langchain4j-azure-open-ai-spring-boot4-starter:${langchain4jSpringVersion}"
-//  implementation "dev.langchain4j:langchain4j-ollama-spring-boot4-starter:${langchain4jSpringVersion}"
+  implementation "dev.langchain4j:langchain4j-spring-boot4-starter"
+  implementation "dev.langchain4j:langchain4j-open-ai-spring-boot4-starter"
+//  implementation "dev.langchain4j:langchain4j-azure-open-ai-spring-boot4-starter"
+//  implementation "dev.langchain4j:langchain4j-ollama-spring-boot4-starter"
   implementation "dev.langchain4j:langchain4j-embeddings-all-minilm-l6-v2"
   // Workaround for AOT issue (https://github.com/spring-projects/spring-framework/pull/33949) -->
   implementation 'io.projectreactor:reactor-core'

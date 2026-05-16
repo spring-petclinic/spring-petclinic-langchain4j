@@ -31,8 +31,7 @@
     <maven-checkstyle.version>3.6.0</maven-checkstyle.version>
     <nohttp-checkstyle.version>0.0.11</nohttp-checkstyle.version>
     <spring-format.version>0.0.47</spring-format.version>
-    <langchain4j.version>1.14.0</langchain4j.version>
-    <langchain4j-spring.version>1.14.0-beta24</langchain4j-spring.version>
+    <langchain4j.version>1.15.0</langchain4j.version>
   </properties>
 
   <dependencyManagement>
@@ -91,14 +90,10 @@
     <dependency>
       <groupId>dev.langchain4j</groupId>
       <artifactId>langchain4j-http-client-spring-boot4-restclient</artifactId>
-      <!-- Waiting https://github.com/langchain4j/langchain4j/pull/5090 -->
-      <version>${langchain4j-spring.version}</version>
     </dependency>
     <dependency>
       <groupId>dev.langchain4j</groupId>
       <artifactId>langchain4j-open-ai-spring-boot4-starter</artifactId>
-      <!-- Waiting https://github.com/langchain4j/langchain4j/pull/5090 -->
-      <version>${langchain4j-spring.version}</version>
     </dependency>
 
     <dependency>
@@ -466,8 +461,6 @@
         <dependency>
           <groupId>dev.langchain4j</groupId>
           <artifactId>langchain4j-open-ai-spring-boot4-starter</artifactId>
-          <!-- Waiting https://github.com/langchain4j/langchain4j/pull/5090 -->
-          <version>${langchain4j-spring.version}</version>
         </dependency>
       </dependencies>
     </profile>
@@ -477,8 +470,6 @@
         <dependency>
           <groupId>dev.langchain4j</groupId>
           <artifactId>langchain4j-azure-open-ai-spring-boot4-starter</artifactId>
-          <!-- Waiting https://github.com/langchain4j/langchain4j/pull/5090 -->
-          <version>${langchain4j-spring.version}</version>
         </dependency>
       </dependencies>
     </profile>
@@ -488,8 +479,6 @@
         <dependency>
           <groupId>dev.langchain4j</groupId>
           <artifactId>langchain4j-ollama-spring-boot4-starter</artifactId>
-          <!-- Waiting https://github.com/langchain4j/langchain4j/pull/5090 -->
-          <version>${langchain4j-spring.version}</version>
         </dependency>
       </dependencies>
     </profile>
