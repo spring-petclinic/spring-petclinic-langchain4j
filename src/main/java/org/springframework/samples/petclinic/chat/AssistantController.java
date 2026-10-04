@@ -2,10 +2,12 @@ package org.springframework.samples.petclinic.chat;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -49,12 +51,7 @@ class AssistantController {
 	}
 
 	private static void sendMessage(SseEmitter emitter, String message) throws IOException {
-		String token = message
-			// Hack line break problem when using Server Sent Events (SSE)
-			.replace("\n", "<br>")
-			// Escape JSON quotes
-			.replace("\"", "\\\"");
-		emitter.send("{\"t\": \"" + token + "\"}");
+		emitter.send(SseEmitter.event().data(Map.of("t", message), MediaType.APPLICATION_JSON));
 	}
 
 }
