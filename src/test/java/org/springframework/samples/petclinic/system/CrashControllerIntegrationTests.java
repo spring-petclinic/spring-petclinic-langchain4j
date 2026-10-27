@@ -16,6 +16,12 @@
 
 package org.springframework.samples.petclinic.system;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
+
+import java.util.List;
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,14 +33,14 @@ import org.springframework.boot.resttestclient.TestRestTemplate;
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
-
-import java.util.List;
-import java.util.Map;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 /**
  * Integration Test for {@link CrashController}.
@@ -43,19 +49,19 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
  */
 // NOT Waiting https://github.com/spring-projects/spring-boot/issues/5574
 @SpringBootTest(webEnvironment = RANDOM_PORT,
-		properties = { "server.error.include-message=ALWAYS", "management.endpoints.enabled-by-default=false" })
+		properties = { "spring.web.error.include-message=ALWAYS", "management.endpoints.access.default=none" })
 @ActiveProfiles("test")
 @AutoConfigureTestRestTemplate
 class CrashControllerIntegrationTests {
 
-	@Value(value = "${local.server.port}")
+	@Value("${local.server.port}")
 	private int port;
 
 	@Autowired
 	private TestRestTemplate rest;
 
 	@Test
-	void testTriggerExceptionJson() {
+	void triggerExceptionJson() {
 		ResponseEntity<Map<String, Object>> resp = rest.exchange(
 				RequestEntity.get("http://localhost:" + port + "/oups").build(),
 				new ParameterizedTypeReference<Map<String, Object>>() {
@@ -71,7 +77,7 @@ class CrashControllerIntegrationTests {
 	}
 
 	@Test
-	void testTriggerExceptionHtml() {
+	void triggerExceptionHtml() {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(List.of(MediaType.TEXT_HTML));
 		ResponseEntity<String> resp = rest.exchange("http://localhost:" + port + "/oups", HttpMethod.GET,
