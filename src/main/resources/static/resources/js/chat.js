@@ -98,7 +98,7 @@ async function displayBotReply(response) {
             return JSON.parse(jsonString);
         }).filter(obj => obj !== null);
         jsonObjects.forEach((item) => {
-            fullReply += item.t.replaceAll('<br>', '\n');
+            fullReply += item.t;
         });
         displayMessage(fullReply, botElements);
     }
